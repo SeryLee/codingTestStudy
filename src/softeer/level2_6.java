@@ -35,10 +35,12 @@ public class level2_6 {
             List<Integer> availableTime = new ArrayList<>();
             List<Integer> checkTime = reservation.get(room.get(i));
             Collections.sort(checkTime);
+            /*예약이 하나도 들어오지 않은 경우*/
             if (checkTime.size() == 0) {
                 availableTime.add(9);
                 availableTime.add(18);
             }
+            /*예약이 한 건만 들어온 경우*/
             for (int j = 0; j < checkTime.size(); j++) {
                 start = checkTime.get(j) / 100;
                 end = checkTime.get(j) % 100;
@@ -63,7 +65,9 @@ public class level2_6 {
                             availableTime.add(18);
                         }
                     }
+                /*예약이 2건 이상 들어온 경우*/
                 } else {
+                    /*첫 번째 예약 건*/
                     if (j == 0) {
                         if (start < 9) {
                             available = false;
@@ -74,6 +78,7 @@ public class level2_6 {
                         } else {
                             availableTime.add(end);
                         }
+                    /*마지막 예약 건*/
                     } else if (j == checkTime.size() - 1) {
                         if (end < 18) {
                             if (availableTime.get(availableTime.size() - 1) > start) {
@@ -98,6 +103,7 @@ public class level2_6 {
                                 availableTime.remove(availableTime.size() - 1);
                             }
                         }
+                    /*중간 예약 건*/
                     } else {
                         if (availableTime.get(availableTime.size() - 1) > start) {
                             available = false;
