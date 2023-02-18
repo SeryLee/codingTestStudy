@@ -77,7 +77,7 @@ public class level3_1 {
         Queue<Integer> job;
         public worker(int depth) {
             this.depth = depth;
-
+            initJob();
         }
         public void initJob() {
             if(depth == H) {
