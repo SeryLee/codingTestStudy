@@ -9,19 +9,22 @@ public class class2_1978 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
         String[] input = br.readLine().split(" ");
-        int[] list = new int[1001];
+        int[] list = new int[N];
         for(int i=0; i<N; i++) {
-            list[Integer.parseInt(input[i])] = Integer.parseInt(input[i]);
-        }
-        for(int i=2; i<1001; i++) {
-            if(list[i] == 0) continue;
-            for(int j=i+i; j<1001; j+=i) {
-                list[j] = 0;
-            }
+            list[i] = Integer.parseInt(input[i]);
         }
         int cnt=0;
-        for (int i=2; i<1001; i++) {
-            if(list[i] != 0) cnt++;
+        boolean isPrime = true;
+        for(int i=0; i<N; i++) {
+            if(list[i] == 1) continue;
+            isPrime = true;
+            for(int j=2; j<=Math.sqrt(list[i]); j++) {
+                if(list[i]%j == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+            if(isPrime == true) cnt++;
         }
         System.out.println(cnt);
     }
