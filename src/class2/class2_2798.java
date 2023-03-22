@@ -19,28 +19,25 @@ public class class2_2798 {
         for(int i=0; i<N; i++) {
             cardList.add(Integer.parseInt(card[i]));
         }
-
         Collections.sort(cardList);
-        int searchNum = N / 2;
-        int first = 0;
-        int end = 0;
-        int mid = 0;
         int result = 0;
-        while (searchNum < N-1 && searchNum > 0) {
-            first = cardList.get(searchNum - 1);
-            mid = cardList.get(searchNum);
-            end = cardList.get(searchNum + 1);
-            if((first+mid+end) == M) {
-                result = (first + mid + end);
-                break;
-            } else if((first+mid+end) < M) {
-                result = Math.max((first + mid + end), result);
-                searchNum++;
-            } else {
-                if(result == 0) {
-                    searchNum--;
+        boolean check = false;
+        for(int i=0; i<N-2; i++) {
+            for(int j=i+1; j<N-1; j++) {
+                for(int h=j+1; h<N; h++) {
+                    int temp = cardList.get(i) + cardList.get(j) + cardList.get(h);
+
+                    if(temp == M) {
+                        result = temp;
+                        check = true;
+                        break;
+                    } else if (temp < M && temp > result) {
+                        result = temp;
+                    }
                 }
+                if(check) break;
             }
+            if(check) break;
         }
         System.out.println(result);
     }
