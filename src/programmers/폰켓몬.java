@@ -1,27 +1,21 @@
 package programmers;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class 폰켓몬 {
     public int solution(int[] nums) {
         int answer = 0;
-        List<Integer> sortedList = new ArrayList<>();
-        Arrays.asList(nums);
-        Collections.sort(sortedList);
-        int check = sortedList.get(0);
-        answer = 1;
-        for(int i=1; i<sortedList.size(); i++) {
-            if(answer == nums.length / 2) break;
-            if(check == sortedList.get(i)) {
-                continue;
-            } else if(check < sortedList.get(i)) {
-                check = sortedList.get(i);
-                answer++;
-            }
+        Map map = new HashMap<Integer, Boolean>();
+        for(int i=0; i<nums.length; i++) {
+            map.put(nums[i], true);
         }
+        int cnt = 0;
+        for (Object value : map.values()) {
+            if(value.equals(true)) cnt++;
+        }
+        if(cnt >= nums.length / 2) {
+            answer = nums.length / 2;
+        } else answer = cnt;
         return answer;
     }
 }
