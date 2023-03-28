@@ -1,25 +1,23 @@
 package programmers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class 완주하지_못한_선수 {
     public String solution(String[] participant, String[] completion) {
         String answer = "";
-        Map<String, Boolean> map = new HashMap<>();
-        for(String a : participant) {
-            map.put(a, false);
+        List<String> pList = new ArrayList<>(Arrays.asList(participant));
+        List<String> cList = new ArrayList<>(Arrays.asList(completion));
+        Collections.sort(pList);
+        Collections.sort(cList);
+
+        for(int i=0; i<completion.length; i++) {
+            if(!pList.get(i).equals(cList.get(i))) {
+                answer = pList.get(i);
+                break;
+            }
         }
-        for(String b : completion) {
-            map.put(b, true);
-        }
-        List<String> result = new ArrayList<>();
-        for (String s : map.keySet()) {
-            if(map.get(s) == false) result.add(s);
-        }
-        answer = result.toString();
+        if(answer.equals("")) answer = pList.get(pList.size()-1);
+
         return answer;
     }
 }
